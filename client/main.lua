@@ -88,7 +88,8 @@ CreateThread(function()
                                         if street2 ~= nil then
                                             streetLabel = streetLabel .. " " .. street2
                                         end
-                                        TriggerServerEvent("qb-storerobbery:server:callCops", "safe", currentSafe, streetLabel, pos)
+                                        --TriggerServerEvent("qb-storerobbery:server:callCops", "safe", currentSafe, streetLabel, pos)
+                                        exports['qb-dispatch']:StoreRobbery(Config.Registers[k].camId)
                                         copsCalled = true
                                     end
                                 else
@@ -150,7 +151,8 @@ RegisterNetEvent('lockpicks:UseLockpick', function(isAdvanced)
                         if street2 ~= nil then
                             streetLabel = streetLabel .. " " .. street2
                         end
-                        TriggerServerEvent("qb-storerobbery:server:callCops", "cashier", currentRegister, streetLabel, pos)
+                        --TriggerServerEvent("qb-storerobbery:server:callCops", "cashier", currentRegister, streetLabel, pos)
+                        exports['qb-dispatch']:StoreRobbery(Config.Registers[k].camId)
                         copsCalled = true
                     end
                 else
@@ -168,7 +170,9 @@ RegisterNetEvent('lockpicks:UseLockpick', function(isAdvanced)
                         if street2 ~= nil then
                             streetLabel = streetLabel .. " " .. street2
                         end
-                        TriggerServerEvent("qb-storerobbery:server:callCops", "cashier", currentRegister, streetLabel, pos)
+                        --TriggerServerEvent("qb-storerobbery:server:callCops", "cashier", currentRegister, streetLabel, pos)
+                        print(Config.Registers[k].camId)
+                        exports['qb-dispatch']:StoreRobbery(Config.Registers[k].camId)
                         copsCalled = true
                     end
 
@@ -318,7 +322,8 @@ function LockpickDoorAnim(time)
 end
 
 RegisterNUICallback('callcops', function()
-    TriggerEvent("police:SetCopAlert")
+    --TriggerEvent("police:SetCopAlert")
+    exports['qb-dispatch']:StoreRobbery()
 end)
 
 RegisterNetEvent('SafeCracker:EndMinigame', function(won)
